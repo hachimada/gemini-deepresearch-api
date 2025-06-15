@@ -6,18 +6,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Project Setup
 ```bash
-# Install backend dependencies
-cd backend && pip install .
+# Install dependencies
+uv sync
 
 # Set up environment variables
-cp backend/.env.example backend/.env
-# Add GEMINI_API_KEY to backend/.env
+cp .env.example .env
+# Add GEMINI_API_KEY to .env
 ```
 
 ### API Development
 ```bash
-cd backend
-
 # Start API server for development
 uv run python -m uvicorn src.agent.app:app --host 0.0.0.0 --port 8000 --reload
 
@@ -30,7 +28,6 @@ curl -X POST "http://localhost:8000/api/research" \
 ### Production Deployment
 ```bash
 # Start API server for production
-cd backend
 uv run python -m uvicorn src.agent.app:app --host 0.0.0.0 --port 8000
 ```
 
@@ -40,7 +37,7 @@ uv run python -m uvicorn src.agent.app:app --host 0.0.0.0 --port 8000
 FastAPI-based REST API that executes comprehensive research using LangGraph agent workflow.
 
 ### LangGraph Agent Flow
-The core research engine is a LangGraph agent (`backend/src/agent/graph.py`) with sequential workflow:
+The core research engine is a LangGraph agent (`src/agent/graph.py`) with sequential workflow:
 
 1. **Query Generation** (`generate_query`): Creates multiple search queries from user input using Gemini 2.0 Flash
 2. **Parallel Web Research** (`web_research`): Executes searches in parallel using Google Search API + Gemini
@@ -78,11 +75,11 @@ Agent behavior controlled via `Configuration` class:
 - **Runtime Override**: Via API request parameters
 
 ### Key Files
-- `backend/src/agent/app.py`: FastAPI application with /api/research endpoint
-- `backend/src/agent/graph.py`: LangGraph agent workflow implementation
-- `backend/src/agent/state.py`: Type definitions for agent state management
-- `backend/src/agent/configuration.py`: Agent configuration schema
-- `backend/src/agent/tools_and_schemas.py`: Pydantic models for structured output
+- `src/agent/app.py`: FastAPI application with /api/research endpoint
+- `src/agent/graph.py`: LangGraph agent workflow implementation
+- `src/agent/state.py`: Type definitions for agent state management
+- `src/agent/configuration.py`: Agent configuration schema
+- `src/agent/tools_and_schemas.py`: Pydantic models for structured output
 
 ### Environment Variables
 - `GEMINI_API_KEY`: Required for Google Gemini API access

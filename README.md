@@ -15,7 +15,7 @@ This project provides a FastAPI-powered deep research service using LangGraph an
 
 The project contains:
 
--   `backend/`: Contains the LangGraph/FastAPI application with the research agent logic
+-   `src/agent/`: Contains the LangGraph/FastAPI application with the research agent logic
 
 ## Getting Started
 
@@ -23,23 +23,20 @@ Follow these steps to get the API server running locally.
 
 **1. Prerequisites:**
 
--   Python 3.8+
+-   Python 3.11+
 -   **`GEMINI_API_KEY`**: The API requires a Google Gemini API key.
-    1.  Navigate to the `backend/` directory.
-    2.  Create a file named `.env` by copying the `backend/.env.example` file.
-    3.  Open the `.env` file and add your Gemini API key: `GEMINI_API_KEY="YOUR_ACTUAL_API_KEY"`
+    1.  Create a file named `.env` by copying the `.env.example` file.
+    2.  Open the `.env` file and add your Gemini API key: `GEMINI_API_KEY="YOUR_ACTUAL_API_KEY"
 
 **2. Install Dependencies:**
 
 ```bash
-cd backend
-pip install .
+uv sync
 ```
 
 **3. Run API Server:**
 
 ```bash
-cd backend
 uv run python -m uvicorn src.agent.app:app --host 0.0.0.0 --port 8000 --reload
 ```
 
@@ -98,7 +95,7 @@ All fields except `query` are optional. Default values:
 
 ## How the Research Agent Works
 
-The core research engine is a LangGraph agent in `backend/src/agent/graph.py` with these steps:
+The core research engine is a LangGraph agent in `src/agent/graph.py` with these steps:
 
 1.  **Generate Initial Queries:** Creates multiple search queries from user input using Gemini 2.0 Flash
 2.  **Web Research:** Executes parallel searches using Google Search API + Gemini
@@ -111,7 +108,6 @@ The core research engine is a LangGraph agent in `backend/src/agent/graph.py` wi
 For production deployment, you can run the API server directly:
 
 ```bash
-cd backend
 uv run python -m uvicorn src.agent.app:app --host 0.0.0.0 --port 8000
 ```
 

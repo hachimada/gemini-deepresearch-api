@@ -40,7 +40,6 @@ Thumbs.db
 __pycache__/
 *.py[cod]
 *$py.class
-uv.lock
 
 # C extensions
 *.so
@@ -199,4 +198,5 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-backend/.langgraph_api
+# LangGraph
+.langgraph/

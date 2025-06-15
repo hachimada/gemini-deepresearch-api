@@ -1,7 +1,7 @@
 [project]
 name = "agent"
 version = "0.0.1"
-description = "Backend for the LangGraph agent"
+description = "Deep Research API using LangGraph and Google Gemini"
 authors = [
     { name = "Philipp Schmid", email = "schmidphilipp1995@gmail.com" },
 ]
